@@ -1,19 +1,6 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_is_perfect - is or not perfect
- * @tree: the tree
- * Return: 1 if is perfect 0 if not
- */
-int binary_tree_is_perfect(const binary_tree_t *tree)
-{
-	int h = height(tree);
-
-	return (is_perfect_util(tree, h, 0));
-}
-
-
-/**
  * height - the tree height
  * @tree: the tree
  * Return: the height
@@ -27,9 +14,9 @@ int height(const binary_tree_t *tree)
 	int right_height = height(tree->right);
 
 	return (
-		(left_height > right_height) ?
-		(left_height + 1) : (right_height + 1)
-		);
+			(left_height > right_height) ?
+			(left_height + 1) : (right_height + 1)
+	       );
 }
 
 
@@ -52,6 +39,19 @@ int is_perfect_util(const binary_tree_t *tree, int height, int level)
 		return (0);
 
 	return (
-		is_perfect_util(tree->left, height, level + 1) &&
-		is_perfect_util(tree->right, height, level + 1));
+			is_perfect_util(tree->left, height, level + 1) &&
+			is_perfect_util(tree->right, height, level + 1));
+}
+
+
+/**
+ * binary_tree_is_perfect - is or not perfect
+ * @tree: the tree
+ * Return: 1 if is perfect 0 if not
+ */
+int binary_tree_is_perfect(const binary_tree_t *tree)
+{
+	int h = height(tree);
+
+	return (is_perfect_util(tree, h, 0));
 }
